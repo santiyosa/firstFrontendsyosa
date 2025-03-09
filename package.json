@@ -14,9 +14,12 @@
     "@remix-run/node": "^2.16.0",
     "@remix-run/react": "^2.16.0",
     "@remix-run/serve": "^2.16.0",
+    "antd": "^5.24.3",
+    "framer-motion": "^12.4.10",
     "isbot": "^4.1.0",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "react-hot-toast": "^2.5.2"
   },
   "devDependencies": {
     "@remix-run/dev": "^2.16.0",
