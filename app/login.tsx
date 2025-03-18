@@ -70,7 +70,7 @@ const AdminLogin = () => {
                                 <button type="button" className="ml-1 text-orange-600">Olvidé mi contraseña</button>
                             </div>
                             <div className="flex justify-center">
-                                <button type="submit" className="w-full px-5 py-2.5 bg-orange-600 text-white rounded-md hover:bg-blue-700">Iniciar sesión</button>
+                                <button type="submit" className="w-full px-5 py-2.5 bg-orange-400 text-white rounded-md hover:bg-blue-700">Iniciar sesión</button>
                             </div>
                             <div className="flex justify-center mt-1 p-3">
                                 <p>¿No tienes una cuenta?
