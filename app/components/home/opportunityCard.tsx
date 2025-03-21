@@ -1,4 +1,4 @@
-import { Link } from "@remix-run/react";
+
 
 interface ServiceCard {
   className?: string;
@@ -10,8 +10,6 @@ interface ServiceCard {
 }
 
 export default function OpportunityCard({
-  className = "",
-  link,
   imageSrc,
   imageAlt,
   title,
@@ -23,7 +21,7 @@ export default function OpportunityCard({
       <img src={imageSrc} alt={imageAlt} className="w-full h-48 object-cover mb-3 rounded-lg" />
       <div className="p-4">
         <h3 className="text-xl mb-3 text-center">{title}</h3>
-        <p className="text-center text-card-foreground text-left dark:text-[#a8afc4]">{description}</p>
+        <p className="text-center text-card-foreground dark:text-[#a8afc4]">{description}</p>
       </div>
     </div>
   );

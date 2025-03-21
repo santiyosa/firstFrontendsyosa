@@ -57,7 +57,7 @@ export default function Navbar() {
                 <Link to="/login" className="block px-4 py-2 hover:bg-gray-200 hover:rounded-md w-full text-center">
                  Ingresar
                 </Link>
-                <Link to="/registro" className="block px-4 py-2 hover:bg-gray-200 hover:rounded-md w-full text-center">
+                <Link to="/register" className="block px-4 py-2 hover:bg-gray-200 hover:rounded-md w-full text-center">
                 Registrarme
                 </Link>
             </div>

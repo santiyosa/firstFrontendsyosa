@@ -10,7 +10,6 @@ import { Toaster } from "react-hot-toast";
 import Navbar from "~/components/Navbar/Navbar";
 import Footer from "~/components/Footer/Footer";
 import "./tailwind.css";
-import { Children } from "react";
 
 export const links: LinksFunction = () => [
   { rel: "preconnect", href: "https://fonts.googleapis.com" },

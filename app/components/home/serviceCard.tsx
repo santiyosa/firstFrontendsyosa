@@ -11,8 +11,6 @@ interface ServiceCard {
 }
 
 export default function ServiceCard({
-  className = "",
-  link,
   imageSrc,
   imageAlt,
   title,

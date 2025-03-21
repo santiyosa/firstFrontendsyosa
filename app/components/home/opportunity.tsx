@@ -1,4 +1,3 @@
-import { Link } from "lucide-react";
 import OpportunityCard from "~/components/home/opportunityCard";
 
 export default function Opportunity() {

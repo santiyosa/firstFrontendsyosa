@@ -1,6 +1,5 @@
 import { useEffect, useRef } from "react";
 
-
 declare global {
   namespace JSX {
     interface IntrinsicElements {
@@ -41,7 +40,7 @@ const Hero: React.FC = () => {
         <p className="text-base md:text-lg mb-4 dark:text-[#a8afc4] text-[#1D1856]"> 
           En la Fundación Antivirus para la Deserción creemos que cada persona merece acceso a las mejores oportunidades.
           Por eso, ofrecemos una plataforma personalizada donde puedes explorar becas, cursos y programas adaptados a tus intereses y necesidades.</p>
-        <div className="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-10 mt-8 justify-center justify-center items-center">
+        <div className="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-10 mt-8 justify-center items-center">
           <a href="#footer" className=" bg-[#ffba08] text-white px-6 py-3 rounded hover:bg-[#ff9c08] hover:scale-105">Contáctanos</a>
           <a href="https://api.whatsapp.com/send?phone=573217066273&text=phone_number&app_absent=0" target="_blank" className="bg-[#ffba08] text-white px-6 py-3 rounded hover:bg-[#ff9c08] hover:scale-105">Sobre nosotros</a>
         </div>
