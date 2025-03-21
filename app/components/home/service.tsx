@@ -3,7 +3,7 @@ import ServiceCard from "~/components/home/serviceCard";
 export default function Services() {
   return (
     <section id="service" className="py-12 w-full dark:bg-[#0f1629] text-black dark:text-white bg-slate-200">
-      <h2 className="text-3xl text-[#32526E] text-center mb-3 dark:text-[#a8afc4]">Servicios</h2>
+      <h2 className="text-4xl text-[#32526E] font-semibold text-center mb-3 dark:text-[#a8afc4]">Servicios</h2>
       <div className="flex justify-center flex-wrap">
         <div className="justify-center max-w-screen-lg mx-auto grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1">
           <ServiceCard
