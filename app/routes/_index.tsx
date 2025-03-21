@@ -1,5 +1,7 @@
 import type { MetaFunction } from "@remix-run/node";
-import AdminLogin from "~/components/adminLogin/adminLogin";
+import Footer from "~/components/Footer/Footer";
+import Login from "~/components/login/login";
+import Navbar from "~/components/Navbar/Navbar";
 
 
 export const meta: MetaFunction = () => {
@@ -12,7 +14,7 @@ export const meta: MetaFunction = () => {
 export default function Index() {
   return (
     <div>
-      <AdminLogin />
+      <Login />
     </div>
   );
 }
