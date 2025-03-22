@@ -20,7 +20,10 @@ export default function Navbar() {
       <div className="flex justify-center gap-6 items-center px-20">
         {/* Logo */}
         <div>
-          <img src="img/logo.png" alt="Logo" className="h-auto w-24 object-contain" />
+          <Link to="/">
+            <img src="img/logo.png" alt="Logo" className="h-auto w-24 object-contain" />
+          </Link>
+
         </div>
 
         {/* Menú en pantallas grandes */}
@@ -69,7 +72,7 @@ export default function Navbar() {
 
           {/* Modo oscuro */}
           <button onClick={toggleTheme} className="hover:text-gray-300 transition">
-            {isDarkMode ? <Sun className="w-6 h-6" /> : <Moon className="w-6 h-6" />}
+            {isDarkMode ? <Moon className="w-6 h-6" /> : <Sun className="w-6 h-6" />}
           </button>
         </div>
 
@@ -98,7 +101,7 @@ export default function Navbar() {
                 <li key={index}>
                   <Link
                     to={`/${item.toLowerCase().replace(" ", "-")}`}
-                    className="block py-2 transition-colors duration-300 hover:text-[#708BC6]">
+                    className="block py-2  transition-colors duration-300 hover:text-[#708BC6]">
                     {item}
                   </Link>
                 </li>

@@ -14,7 +14,6 @@ export default function Index() {
         <HomeAntivirus />
       </div>
     </div>
-
   );
 }
 
