@@ -28,15 +28,21 @@ export default function Navbar() {
 
         {/* Menú en pantallas grandes */}
         <ul className="hidden md:flex gap-6 font-semibold">
-          {["Servicios", "Oportunidades", "Quiénes Somos", "Novedades"].map((item, index) => (
+          {[
+            { label: "Servicios", href: "#service" },
+            { label: "Oportunidades", href: "#opportunity" },
+            { label: "Quiénes Somos", href: "/about" },
+            { label: "Novedades", href: "/novedades" },
+          ].map((item, index) => (
             <li key={index} className="relative group">
-              <a href={`/${item.toLowerCase().replace(" ", "-")}`} className="hover:text-gray-300 block pb-2">
-                {item}
+              <a href={item.href} className="hover:text-gray-300 block pb-2">
+                {item.label}
               </a>
               <span className="absolute left-1/2 bottom-0 translate-x-[-50%] w-0 h-[3px] bg-[#FFBA08] transition-all duration-300 group-hover:w-full"></span>
             </li>
           ))}
         </ul>
+
       </div>
       <div>
         {/* Iconos en pantallas grandes */}
@@ -97,16 +103,23 @@ export default function Navbar() {
 
             {/* Opciones del menú */}
             <ul className="flex flex-col gap-4 w-full text-center text-lg">
-              {["Servicios", "Oportunidades", "Quiénes Somos", "Novedades"].map((item, index) => (
+              {[
+                { label: "Servicios", href: "#service" },
+                { label: "Oportunidades", href: "#opportunity" },
+                { label: "Quiénes Somos", href: "/about" },
+                { label: "Novedades", href: "/novedades" },
+              ].map((item, index) => (
                 <li key={index}>
                   <Link
-                    to={`/${item.toLowerCase().replace(" ", "-")}`}
-                    className="block py-2  transition-colors duration-300 hover:text-[#708BC6]">
-                    {item}
+                    to={item.href}
+                    className="block py-2 transition-colors duration-300 hover:text-[#708BC6]"
+                  >
+                    {item.label}
                   </Link>
                 </li>
               ))}
             </ul>
+
 
             {/* Botones de Ingresar y Registrarme */}
             <div className="flex gap-4 w-full justify-center">

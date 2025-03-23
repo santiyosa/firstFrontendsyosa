@@ -2,7 +2,7 @@ import OpportunityCard from "~/components/home/opportunityCard";
 
 export default function Opportunity() {
   return (
-    <section id="service" className="py-12 w-full dark:bg-[#283747] text-black dark:text-white">
+    <section id="opportunity" className="py-12 w-full dark:bg-[#283747] text-black dark:text-white">
       <h2 className="text-3xl text-[#32526E] text-center mb-5 dark:text-[#a8afc4]">¡Descubre estas oportunidades únicas!</h2>
       <div className="flex justify-center flex-wrap">
         <div className="justify-center max-w-screen-lg mx-auto grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 ">

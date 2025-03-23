@@ -33,7 +33,7 @@ export default function App() {
         <Meta />
         <Links />
       </head>
-      <body className="bg-gray-100 dark:bg-gray-800 h-full flex flex-col min-h-screen">
+      <body className="bg-gray-100 font-roboto dark:bg-gray-800 h-full flex flex-col min-h-screen">
         <Toaster position="top-right" />
         <Navbar />
         <main className="flex-grow">
