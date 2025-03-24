@@ -10,6 +10,7 @@ import Navbar from "~/components/Navbar";
 import Footer from "~/components/Footer";
 
 import "./tailwind.css";
+import WompiButton from "./components/wompi";
 
 
 
@@ -41,6 +42,7 @@ export default function App() {
         <ScrollRestoration />
         <Scripts />
         <Footer />
+        <WompiButton />
       </body>
     </html>
   );

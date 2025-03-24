@@ -1,13 +1,10 @@
 import Service from "./service"
 import Opportunity from "./opportunity"
 import DollHome from "./dollhome";
-import WompiButton from "../wompi";
-
 
 export default function HomeAntivirus() {
   return (
     <div>
-      
       <div>
       <DollHome />
       </div>
@@ -17,7 +14,7 @@ export default function HomeAntivirus() {
       <div>
         <Service />
       </div>
-      <WompiButton />
+
     </div>
   )
 }
