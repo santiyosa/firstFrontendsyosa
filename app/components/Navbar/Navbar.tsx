@@ -1,13 +1,19 @@
 import { useState } from "react";
-import { Link } from "@remix-run/react";
+import { Form, Link } from "@remix-run/react";
 import { Menu, X, Sun, Moon, Search, User } from "lucide-react";
+import { logout } from "~/services/authService";
 
+interface NavbarProps {
+  isAuthenticated: boolean;
+}
 
-export default function Navbar() {
+export default function Navbar({ isAuthenticated }: NavbarProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
   const [isDarkMode, setIsDarkMode] = useState(false);
+
+  console.log(isAuthenticated);
 
   const toggleTheme = () => {
     setIsDarkMode(!isDarkMode);
@@ -27,22 +33,29 @@ export default function Navbar() {
         </div>
 
         {/* Menú en pantallas grandes */}
-        <ul className="hidden md:flex gap-6 font-semibold">
-          {[
-            { label: "Servicios", href: "#service" },
-            { label: "Oportunidades", href: "#opportunity" },
-            { label: "Quiénes Somos", href: "/about" },
-            { label: "Novedades", href: "/novedades" },
-          ].map((item, index) => (
-            <li key={index} className="relative group">
-              <a href={item.href} className="hover:text-gray-300 block pb-2">
-                {item.label}
-              </a>
-              <span className="absolute left-1/2 bottom-0 translate-x-[-50%] w-0 h-[3px] bg-[#FFBA08] transition-all duration-300 group-hover:w-full"></span>
-            </li>
-          ))}
-        </ul>
-
+        {isAuthenticated ? (
+          <ul className="hidden md:flex gap-6 font-semibold">
+            {["Servicios", "Oportunidades", "Quiénes Somos", "Novedades"].map((item, index) => (
+              <li key={index} className="relative group">
+                <a href={`/${item.toLowerCase().replace(" ", "-")}`} className="hover:text-gray-300 block pb-2">
+                  {item}
+                </a>
+                <span className="absolute left-1/2 bottom-0 translate-x-[-50%] w-0 h-[3px] bg-[#FFBA08] transition-all duration-300 group-hover:w-full"></span>
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <ul className="hidden md:flex gap-6 font-semibold">
+            {["Servicios", "Oportunidades", "Quiénes Somos"].map((item, index) => (
+              <li key={index} className="relative group">
+                <a href={`/${item.toLowerCase().replace(" ", "-")}`} className="hover:text-gray-300 block pb-2">
+                  {item}
+                </a>
+                <span className="absolute left-1/2 bottom-0 translate-x-[-50%] w-0 h-[3px] bg-[#FFBA08] transition-all duration-300 group-hover:w-full"></span>
+              </li>
+            ))}
+          </ul>
+        )}
       </div>
       <div>
         {/* Iconos en pantallas grandes */}
@@ -53,13 +66,28 @@ export default function Navbar() {
               <User className="w-6 h-6" />
             </button>
             {isUserMenuOpen && (
-              <div className="absolute right-0 top-10 bg-white text-black shadow-md rounded-md w-40">
-                <Link to="/login" className="block px-4 py-2 hover:bg-gray-200 hover:rounded-md w-full text-center">
-                  Ingresar
-                </Link>
-                <Link to="/register" className="block px-4 py-2 hover:bg-gray-200 hover:rounded-md w-full text-center">
-                  Registrarme
-                </Link>
+              <div className="absolute right-0 top-10  text-black shadow-md rounded-md w-40">
+                {isAuthenticated ? (
+                  <Form method="post" action="/logout">
+                    <button type="submit"
+                      className="bg-[#32526E] text-white px-6 py-2 rounded-lg text-lg transition-colors duration-300 hover:bg-[#233947]">
+                      Cerrar sesión
+                    </button>
+                  </Form>
+                ) : (
+                  <>
+                    <Link
+                      to="/login"
+                      className="bg-[#32526E] text-white px-6 py-2 rounded-lg text-lg transition-colors duration-300 hover:bg-[#233947] m-2">
+                      Ingresar
+                    </Link>
+                    <Link
+                      to="/registro"
+                      className="bg-[#32526E] text-white px-6 py-2 rounded-lg text-lg transition-colors duration-300 hover:bg-[#233947]">
+                      Registrarme
+                    </Link>
+                  </>
+                )}
               </div>
             )}
           </div>
@@ -102,37 +130,57 @@ export default function Navbar() {
             </div>
 
             {/* Opciones del menú */}
-            <ul className="flex flex-col gap-4 w-full text-center text-lg">
-              {[
-                { label: "Servicios", href: "#service" },
-                { label: "Oportunidades", href: "#opportunity" },
-                { label: "Quiénes Somos", href: "/about" },
-                { label: "Novedades", href: "/novedades" },
-              ].map((item, index) => (
-                <li key={index}>
-                  <Link
-                    to={item.href}
-                    className="block py-2 transition-colors duration-300 hover:text-[#708BC6]"
-                  >
-                    {item.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
+            {isAuthenticated ? (
+              <ul className="flex flex-col gap-4 w-full text-center text-lg">
+                {["Servicios", "Oportunidades", "Quiénes Somos", "Novedades"].map((item, index) => (
+                  <li key={index}>
+                    <Link
+                      to={`/${item.toLowerCase().replace(" ", "-")}`}
+                      className="block py-2  transition-colors duration-300 hover:text-[#708BC6]">
+                      {item}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            ) : (
+              <ul className="flex flex-col gap-4 w-full text-center text-lg">
+                {["Servicios", "Oportunidades", "Quiénes Somos"].map((item, index) => (
+                  <li key={index}>
+                    <Link
+                      to={`/${item.toLowerCase().replace(" ", "-")}`}
+                      className="block py-2  transition-colors duration-300 hover:text-[#708BC6]">
+                      {item}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            )}
 
 
             {/* Botones de Ingresar y Registrarme */}
-            <div className="flex gap-4 w-full justify-center">
-              <Link
-                to="/login"
-                className="bg-[#32526E] text-white px-6 py-2 rounded-lg text-lg transition-colors duration-300 hover:bg-[#233947]">
-                Ingresar
-              </Link>
-              <Link
-                to="/registro"
-                className="bg-[#32526E] text-white px-6 py-2 rounded-lg text-lg transition-colors duration-300 hover:bg-[#233947]">
-                Registrarme
-              </Link>
+            <div className="flex gap-4 w-full justify-center ">
+              {isAuthenticated ? (
+                <Form method="post" action="/logout">
+                  <button type="submit"
+                    className="bg-[#32526E] text-white px-6 py-2 rounded-lg text-lg transition-colors duration-300 hover:bg-[#233947]">
+                    Cerrar sesión
+                  </button>
+                </Form>
+              ) : (
+                <>
+                  <Link
+                    to="/login"
+                    className="bg-[#32526E] text-white px-6 py-2 rounded-lg text-lg transition-colors duration-300 hover:bg-[#233947]">
+                    Ingresar
+                  </Link>
+                  <Link
+                    to="/registro"
+                    className="bg-[#32526E] text-white px-6 py-2 rounded-lg text-lg transition-colors duration-300 hover:bg-[#233947]">
+                    Registrarme
+                  </Link>
+                </>
+              )}
+
             </div>
           </div>
         )}
