@@ -27,7 +27,44 @@ export async function login(email: string, password: string) {
         console.error(error);
     }
 }
+/**
+* Realiza la solicitud de registro a la API.
+* @param {string} firstName - nombre del usuario.
+* @param {string} lastName - apellido del usuario.
+* @param {string} birthDate - fecha de nacimiento del usuario.
+* @param {string} email - Correo del usuario.
+* @param {string} password - Contraseña del usuario.
+* @param {number} role - rol del usuario.
+* @returns {Promise<Object>} - Datos del usuario registrado.
+*/
+export async function register(
+    firstName: string,
+    lastName: string,
+    birthDate: string,
+    email: string,
+    password: string,
+    roleId: number=1
+) {
+    try {
+        const response = await fetch('http://localhost:5000/api/auth/register', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ firstName, lastName, birthDate, email, password, roleId })
+        });
 
+        if(response.ok) {
+            const data = await response.json();
+            return data;
+        } else {
+            throw new Error('Error al registrar');
+        }
+
+    } catch (error) {
+        console.error(error);
+    }
+}
 /**
  * Verifica si hay un token válido en las cookies.
  * @param {Request} request - Petición HTTP.

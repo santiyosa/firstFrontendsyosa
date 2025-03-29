@@ -24,11 +24,9 @@ export const action: ActionFunction = async ({ request }) => {
 }
 
 export default function Login() {
-    console.log("Login");
 
     const actionData = useActionData();
     const fetcher = useFetcher();
-    console.log(actionData);
 
     return (
         <div className="flex justify-center items-center py-8 mt-24">

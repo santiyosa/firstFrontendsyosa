@@ -1,8 +1,7 @@
 import { useActionData } from "@remix-run/react";
 import { json, redirect } from "@remix-run/node";
 import type { ActionFunction } from "@remix-run/node";
-import Beneficios from "~/components/Benefits";
-import { div } from "framer-motion/client";
+import { register } from "~/services/authService";
 
 export const action: ActionFunction = async ({ request }) => {
   const formData = await request.formData();
@@ -18,9 +17,16 @@ export const action: ActionFunction = async ({ request }) => {
       error: "Las contraseñas no coinciden.",
       values: { nombre, apellido, fechaNacimiento, email },
     });
+  }else{
+    register(
+      nombre as string,
+      apellido as string,
+      fechaNacimiento as string,
+      email as string,
+      password as string,
+      1);
+    return redirect("/login");
   }
-
-  return redirect("/login");
 };
 
 
