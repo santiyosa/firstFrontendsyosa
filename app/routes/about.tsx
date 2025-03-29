@@ -15,9 +15,6 @@ const About = () => {
 
   }, []);
 
-  console.log(images);
-
-
   return (
     <div className="bg-[#e2e8f0] pt-36 pb-5">
       <h1 className="text-[#fdc80a] text-[36px] font-bold text-center">¿QUIÉNES SOMOS?</h1>

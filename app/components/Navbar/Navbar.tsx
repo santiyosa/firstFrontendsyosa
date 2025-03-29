@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { Form, Link } from "@remix-run/react";
 import { Menu, X, Sun, Moon, Search, User } from "lucide-react";
-import { logout } from "~/services/authService";
 
 interface NavbarProps {
   isAuthenticated: boolean;
@@ -82,7 +81,7 @@ export default function Navbar({ isAuthenticated }: NavbarProps) {
                       Ingresar
                     </Link>
                     <Link
-                      to="/registro"
+                      to="/register"
                       className="bg-[#32526E] text-white px-6 py-2 rounded-lg text-lg transition-colors duration-300 hover:bg-[#233947]">
                       Registrarme
                     </Link>
