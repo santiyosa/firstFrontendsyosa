@@ -51,62 +51,60 @@ const Novedades = () => {
     };
 
     return (
-        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center', backgroundColor: '#fff', color: '#000', minHeight: '100vh', padding: '20px' }}>
-            <h1 style={{ fontSize: '2rem', marginBottom: '1rem' }}>Novedades</h1>
+        <div className="flex flex-col items-center text-center bg-white text-black min-h-screen p-5">
+            <h1 className="text-2xl mb-4">Novedades</h1>
             <p>{data.message}</p>
-            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', position: 'relative', width: '100%', maxWidth: '300px', overflow: 'hidden' }}>
-                <button onClick={prevImage} style={{ position: 'absolute', left: '0', zIndex: 1 }}>Previous</button>
-                <img src={data.images[currentImageIndex]} alt="carousel" style={{ width: '100%', borderRadius: '10px' }} />
-                <button onClick={nextImage} style={{ position: 'absolute', right: '0', zIndex: 1 }}>Next</button>
+            <div className="relative w-full max-w-md overflow-hidden flex items-center justify-center">
+                <button onClick={prevImage} className="absolute left-0 z-10">Previous</button>
+                <img src={data.images[currentImageIndex]} alt="carousel" className="w-full rounded-lg" />
+                <button onClick={nextImage} className="absolute right-0 z-10">Next</button>
             </div>
-            <div style={{ marginTop: '1rem' }}>
+            <div className="mt-4 flex justify-center space-x-2">
                 {data.images.map((_, index) => (
-                    <span key={index} style={{ height: '10px', width: '10px', margin: '0 5px', backgroundColor: currentImageIndex === index ? '#000' : '#ccc', borderRadius: '50%', display: 'inline-block' }}></span>
+                    <span key={index} className={`h-2 w-2 rounded-full ${currentImageIndex === index ? 'bg-black' : 'bg-gray-300'}`}></span>
                 ))}
             </div>
-            <div style={{ marginTop: '2rem', width: '100%', maxWidth: '900px', textAlign: 'left', backgroundColor: '#fff', padding: '20px', borderRadius: '10px', boxShadow: '0 0 10px rgba(0, 0, 0, 0.1)' }}>
-                <input type="text" placeholder="Busca tu próxima oportunidad" style={{ backgroundColor: '#fff', width: '100%', padding: '10px', borderRadius: '5px', border: '1px solid #ccc', marginBottom: '1rem' }} />
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
+            <div className="mt-8 w-full max-w-3xl text-left bg-gray-100 p-5 rounded-lg shadow-md">
+                <input type="text" placeholder="Busca tu próxima oportunidad" className="w-full bg-white p-2 rounded border border-gray-300 mb-4" />
+                <div className="flex justify-between items-center mb-4">
                     <span>¡Filtra tu búsqueda!</span>
-                    <input style={{ backgroundColor: '#fff' }} type="date" />
+                    <input type="date" className="bg-white" />
                     <span>→</span>
-                    <input style={{ backgroundColor: '#fff' }} type="date" />
+                    <input type="date" className="bg-white" />
                 </div>
-                <div style={{ display: 'flex', flexWrap: 'wrap', gap: '10px', marginBottom: '1rem' }}>
-                    <select style={{ backgroundColor: '#fff', padding: '10px', borderRadius: '5px', border: '1px solid #ccc' }}>
+                <div className="flex flex-wrap gap-2 mb-4">
+                    <select className="p-2 rounded border bg-white">
                         <option>Ubicación</option>
                         <option>Medellín, Antioquia</option>
                     </select>
-                    <select style={{ backgroundColor: '#fff', padding: '10px', borderRadius: '5px', border: '1px solid #ccc' }}>
+                    <select className="p-2 rounded border bg-white">
                         <option>Tipo de oportunidad</option>
                         <option>Educativa</option>
                     </select>
-                    <select style={{ backgroundColor: '#fff', padding: '10px', borderRadius: '5px', border: '1px solid #ccc' }}>
+                    <select className="p-2 rounded border bg-white">
                         <option>Sector</option>
                         <option>Tecnología</option>
                     </select>
                 </div>
-                <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                    <button style={{ padding: '10px 20px', borderRadius: '5px', border: 'none', backgroundColor: '#f90', color: '#fff' }}>Búsqueda</button>
-                    <button style={{ padding: '10px 20px', borderRadius: '5px', border: '1px solid #ccc', backgroundColor: '#fff' }}>Limpiar</button>
+                <div className="flex justify-between">
+                    <button className="px-4 py-2 rounded bg-orange-500 text-white">Búsqueda</button>
+                    <button className="px-4 py-2 rounded border border-gray-300 bg-white">Limpiar</button>
                 </div>
             </div>
-            <h5 style={{ marginTop: '2rem',  fontSize: '1.5rem', fontWeight: 'bold', color: '#003366' }}>¡Oportunidades para estudiar!</h5>
-            <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: '20px', marginTop: '2rem' }}>
+            <h5 className="mt-8 text-xl font-bold text-blue-900">¡Oportunidades para estudiar!</h5>
+            <div className="flex flex-wrap justify-center gap-5 mt-8">
                 {data.opportunities.map((opportunity, index) => (
-                    <div key={index} style={{ width: 'calc(50% - 20px)', border: '1px solid #ccc', borderRadius: '10px', overflow: 'hidden', textAlign: 'left', position: 'relative', maxWidth: '400px' }}>
-                        <img src={opportunity.image} alt={opportunity.title} style={{ width: '100%', height: '220px', objectFit: 'cover' }} />
-                        <div style={{ padding: '10px' }}>
-                            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                                <h2 style={{ fontSize: '1rem', marginBottom: '0.5rem' }}>{opportunity.title}</h2>
-                                <button style={{ padding: '5px 10px', borderRadius: '20px', border: '1px solid #ccc', backgroundColor: '#fff', color: '#000', fontWeight: 'bold' }}>GUARDAR</button>
+                    <div key={index} className="w-[calc(50%-20px)] max-w-lg border border-gray-300 rounded-lg overflow-hidden text-left relative">
+                        <img src={opportunity.image} alt={opportunity.title} className="w-full h-56 object-cover" />
+                        <div className="p-4">
+                            <div className="flex justify-between items-center">
+                                <h2 className="text-lg mb-2">{opportunity.title}</h2>
+                                <button className="px-3 py-1 rounded-full border border-gray-300 bg-white font-bold">GUARDAR</button>
                             </div>
                             <p>
                                 {expanded[index] ? opportunity.description : `${opportunity.description.substring(0, 70)}...`}
                                 {opportunity.description.length > 70 && (
-                                    <button onClick={() => toggleExpand(index)} style={{ marginLeft: '5px', color: '#007bff', background: 'none', border: 'none', cursor: 'pointer' }}>
-                                        {expanded[index] ? 'ver menos' : 'ver más'}
-                                    </button>
+                                    <button onClick={() => toggleExpand(index)} className="ml-2 text-blue-500">{expanded[index] ? 'ver menos' : 'ver más'}</button>
                                 )}
                             </p>
                         </div>
