@@ -13,13 +13,12 @@ import Navbar from "~/components/Navbar/Navbar";
 import Footer from "~/components/Footer/Footer";
 import "./tailwind.css";
 import { checkAuth } from "~/services/authService";
-
 import type { LoaderFunction } from "@remix-run/node";
 
 export const loader: LoaderFunction = async ({ request }) => {
   const isAuthenticated = await checkAuth(request);
   return { isAuthenticated };
-}
+};
 
 export const links: LinksFunction = () => [
   { rel: "preconnect", href: "https://fonts.googleapis.com" },
@@ -37,8 +36,15 @@ export const links: LinksFunction = () => [
 export default function App() {
   const { isAuthenticated } = useLoaderData<{ isAuthenticated: boolean }>();
   const location = useLocation();
-  const isAdminPanel = location.pathname.startsWith("/admin");
-
+  const hiddenRoutes = [
+    "/admin",
+    "/themes",
+    "/bootcamps",
+    "/novedades",
+    "/opportunies",
+    "/user"
+  ];
+  const shouldHideNavAndFooter = hiddenRoutes.some(route => location.pathname.startsWith(route));
 
   return (
     <html lang="es" className="h-full">
@@ -50,13 +56,11 @@ export default function App() {
       </head>
       <body className="bg-gray-100 font-roboto dark:bg-gray-800 h-full flex flex-col min-h-screen">
         <Toaster position="top-right" />
-        {!isAdminPanel && <Navbar isAuthenticated={isAuthenticated} />}
+        {!shouldHideNavAndFooter && <Navbar isAuthenticated={isAuthenticated} />}
         <main className="flex-grow">
-
           <Outlet />
-
         </main>
-        {!isAdminPanel && <Footer />}
+        {!shouldHideNavAndFooter && <Footer />}
         <ScrollRestoration />
         <Scripts />
       </body>
