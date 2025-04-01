@@ -2,17 +2,26 @@ import { motion } from "framer-motion";
 import { login } from "../services/authService";
 import { tokenCookie } from "../utils/cookies";
 import { useActionData, useFetcher } from "@remix-run/react";
-import { redirect } from "@remix-run/node";
+import { redirect, json } from "@remix-run/node";
 
 import type { ActionFunction } from "@remix-run/node";
 
 export const action: ActionFunction = async ({ request }) => {
-    const formData = await request.formData();
-    const email = formData.get("email");
-    const password = formData.get("password");
+    try {
+        const formData = await request.formData();
+        const email = formData.get("email");
+        const password = formData.get("password");
 
-    if (email && password) {
+        if (!email || !password) {
+            return json({ error: "Debes ingresar un correo y contraseña." }, { status: 400 });
+        }
+
         const data = await login(email as string, password as string);
+
+        if (!data || !data.token) {
+            return json({ error: "Correo o contraseña incorrectos." }, { status: 401 });
+        }
+
         const token = data.token.replace(/['"]+/g, "");
 
         return redirect("/novedades", {
@@ -20,8 +29,12 @@ export const action: ActionFunction = async ({ request }) => {
                 "Set-Cookie": await tokenCookie.serialize(token),
             },
         });
+
+    } catch (error) {
+        console.error("Error en login:", error);
+        return json({ error: "Ocurrió un problema. Inténtalo de nuevo." }, { status: 500 });
     }
-}
+};
 
 export default function Login() {
 
