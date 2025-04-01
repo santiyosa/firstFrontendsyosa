@@ -18,11 +18,12 @@ export default function Services() {
                     <ServiceCard
             className=""
             link=""
-            imageSrc="/img/imagen2.png"
+            
             imageAlt="Asesoría Sociopedagógica"
             title="Asesoría Sociopedagógica"
             description="Recibe orientación personalizada para superar los desafíos educativos. Nuestra asesoría sociopedagógica te ofrece herramientas y estrategias para mejorar tu rendimiento académico y bienestar personal."
             buttonText=" LO QUIERO "
+            imageSrc="/img/imagen2.png"
           />
                     <ServiceCard
             className=""

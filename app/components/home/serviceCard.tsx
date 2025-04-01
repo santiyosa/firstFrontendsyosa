@@ -27,10 +27,8 @@ export default function ServiceCard({
       <div className="p-6">
         <h3 className="text-xl mb-3 text-center">{title}</h3>
         <p className="text-gray-700 mb-8 dark:text-[#a8afc4]">{description}</p>
-        <Link
-          to="/register"
-          className="text-[#FDC80A] border-[0.3vw] border-[#FDC80A] py-2 px-4 rounded hover:bg-[#FAA307] hover:text-white"
-        >
+        <Link to="/register"
+          className="text-[#FDC80A] border-[0.3vw] border-[#FDC80A] py-2 px-4 rounded hover:bg-[#FAA307] hover:text-white">
           {buttonText}
         </Link>
       </div>

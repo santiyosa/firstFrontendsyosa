@@ -14,7 +14,6 @@ export default function HomeAntivirus() {
       <div>
         <Service />
       </div>
-
     </div>
   )
 }
