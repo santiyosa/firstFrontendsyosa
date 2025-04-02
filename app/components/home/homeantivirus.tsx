@@ -6,7 +6,7 @@ export default function HomeAntivirus() {
   return (
     <div>
       <div>
-      <DollHome />
+        <DollHome />
       </div>
       <div>
         <Opportunity />

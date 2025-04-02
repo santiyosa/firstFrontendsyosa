@@ -4,15 +4,21 @@ import {
   Outlet,
   Scripts,
   ScrollRestoration,
+  useLoaderData,
+  useLocation
 } from "@remix-run/react";
 import type { LinksFunction } from "@remix-run/node";
-import Navbar from "~/components/Navbar";
-import Footer from "~/components/Footer";
-
+import { Toaster } from "react-hot-toast";
+import Navbar from "~/components/Navbar/Navbar";
+import Footer from "~/components/Footer/Footer";
 import "./tailwind.css";
-import WompiButton from "./components/wompi";
+import { checkAuth } from "~/services/authService";
+import type { LoaderFunction } from "@remix-run/node";
 
-
+export const loader: LoaderFunction = async ({ request }) => {
+  const isAuthenticated = await checkAuth(request);
+  return { isAuthenticated };
+};
 
 export const links: LinksFunction = () => [
   { rel: "preconnect", href: "https://fonts.googleapis.com" },
@@ -28,21 +34,35 @@ export const links: LinksFunction = () => [
 ];
 
 export default function App() {
+  const { isAuthenticated } = useLoaderData<{ isAuthenticated: boolean }>();
+  const location = useLocation();
+  const hiddenRoutes = [
+    "/admin",
+    "/themes",
+    "/bootcamps",
+    "/novedades",
+    "/opportunies",
+    "/user"
+  ];
+  const shouldHideNavAndFooter = hiddenRoutes.some(route => location.pathname.startsWith(route));
+
   return (
-    <html lang="es">
+    <html lang="es" className="h-full">
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <Meta />
         <Links />
       </head>
-      <body className="bg-gray-100 dark:bg-gray-800">
-        <Navbar />
-        <Outlet />
+      <body className="bg-gray-100 font-roboto dark:bg-gray-800 h-full flex flex-col min-h-screen">
+        <Toaster position="top-right" />
+        {!shouldHideNavAndFooter && <Navbar isAuthenticated={isAuthenticated} />}
+        <main className="flex-grow">
+          <Outlet />
+        </main>
+        {!shouldHideNavAndFooter && <Footer />}
         <ScrollRestoration />
         <Scripts />
-        <Footer />
-        <WompiButton />
       </body>
     </html>
   );
