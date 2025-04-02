@@ -40,11 +40,11 @@ export default function App() {
     "/admin",
     "/themes",
     "/bootcamps",
-    "/novedades",
     "/opportunies",
     "/user"
   ];
   const shouldHideNavAndFooter = hiddenRoutes.some(route => location.pathname.startsWith(route));
+  console.log(shouldHideNavAndFooter);
 
   return (
     <html lang="es" className="h-full">
