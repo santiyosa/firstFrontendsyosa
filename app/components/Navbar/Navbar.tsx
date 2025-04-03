@@ -2,9 +2,12 @@ import { useState } from "react";
 import { Form, Link, useLocation } from "@remix-run/react";
 import { Menu, X, Sun, Moon, Search, User } from "lucide-react";
 
-interface NavbarProps {
+export interface NavbarProps {
   isAuthenticated: boolean;
+  nombre: string;
+  rol: string;
 }
+
 
 export default function Navbar({ isAuthenticated }: NavbarProps) {
   const [isOpen, setIsOpen] = useState(false);
@@ -33,6 +36,16 @@ export default function Navbar({ isAuthenticated }: NavbarProps) {
         </div>
 
         {/* Menú en pantallas grandes */}
+
+        {/* <ul>
+            {rol === ROLE_ADMIN ? (
+             <Link to={ROUTES.ADMIN} className="hover:underline">Administrador</Link>
+            ) : (
+              <Link to={ROUTES.DEFAULT} className="hover:underline">Novedades</Link>
+        
+            )}
+          </ul> */}
+
         {isAuthenticated ? (
           <ul className="hidden md:flex gap-6 font-semibold">
             {["Servicios", "Oportunidades", "Quiénes Somos", "Novedades"].map((item, index) => (
@@ -55,7 +68,7 @@ export default function Navbar({ isAuthenticated }: NavbarProps) {
               </li>
             ))}
           </ul>
-        )}
+        )} 
       </div>
 
       <div>
@@ -64,40 +77,40 @@ export default function Navbar({ isAuthenticated }: NavbarProps) {
           {/* El icono de usuario solo se muestra si no estamos en "Novedades" */}
           {!isNovedadesPage && (
             <div className="relative">
-            <button className="hover:text-gray-300 transition" onClick={() => setIsUserMenuOpen(!isUserMenuOpen)}>
-              <User className="w-6 h-6" />
-            </button>
-            {isUserMenuOpen && (
-              <div className="absolute right-0 top-10 bg-white dark:bg-gray-800 shadow-lg rounded-md w-48 p-2 space-y-2 z-50">
-                {isAuthenticated ? (
-                  <Form method="post" action="/logout">
-                    <button
-                      type="submit"
-                      className="w-full text-left px-4 py-2 text-gray-800 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 rounded transition-colors"
-                    >
-                      Cerrar sesión
-                    </button>
-                  </Form>
-                ) : (
-                  <>
-                    <Link
-                      to="/login"
-                      className="block px-4 py-2 text-gray-800 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 rounded transition-colors"
-                    >
-                      Ingresar
-                    </Link>
-                    <Link
-                      to="/register"
-                      className="block px-4 py-2 text-gray-800 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 rounded transition-colors"
-                    >
-                      Registrarme
-                    </Link>
-                  </>
-                )}
-                
-              </div>
-            )}
-          </div>
+              <button className="hover:text-gray-300 transition" onClick={() => setIsUserMenuOpen(!isUserMenuOpen)}>
+                <User className="w-6 h-6" />
+              </button>
+              {isUserMenuOpen && (
+                <div className="absolute right-0 top-10 bg-white dark:bg-gray-800 shadow-lg rounded-md w-48 p-2 space-y-2 z-50">
+                  {isAuthenticated ? (
+                    <Form method="post" action="/logout">
+                      <button
+                        type="submit"
+                        className="w-full text-left px-4 py-2 text-gray-800 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 rounded transition-colors"
+                      >
+                        Cerrar sesión
+                      </button>
+                    </Form>
+                  ) : (
+                    <>
+                      <Link
+                        to="/login"
+                        className="block px-4 py-2 text-gray-800 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 rounded transition-colors"
+                      >
+                        Ingresar
+                      </Link>
+                      <Link
+                        to="/register"
+                        className="block px-4 py-2 text-gray-800 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 rounded transition-colors"
+                      >
+                        Registrarme
+                      </Link>
+                    </>
+                  )}
+
+                </div>
+              )}
+            </div>
           )}
 
           {/* Barra de búsqueda */}

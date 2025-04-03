@@ -57,18 +57,18 @@ export default function Login() {
     // const actionData = useActionData();
     const fetcher = useFetcher();
 
-    const storeUserDataInLocalStorage = (token) => {
+    // const storeUserDataInLocalStorage = (token) => {
 
-        const decodedToken = decodeJWTWithoutVerify(token);
-        
-        const emailData = decodedToken["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name"];
-        const role = decodedToken["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"];
+    //     const decodedToken = decodeJWTWithoutVerify(token);
 
-        localStorage.setItem("email", emailData);
-        localStorage.setItem("role", role);
+    //     const emailData = decodedToken["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name"];
+    //     const role = decodedToken["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"];
 
-        console.log("Email:", emailData);
-    }
+    //     localStorage.setItem("email", emailData);
+    //     localStorage.setItem("role", role);
+
+    //     console.log("Email:", emailData);
+    // }
 
     return (
         <div className="flex justify-center items-center py-8 mt-24">

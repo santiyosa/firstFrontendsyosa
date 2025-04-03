@@ -1,11 +1,14 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import UserManagement from "./user";
+import Bootcamp from "./bootcamps";
+import Categorias from "./category";
+import Instituciones from "./instituciones";
+import Oportunidades from "./opportunities";
+import Tematicas from "./themes";
 
 export default function Dashboard() {
     const [selectedSection, setSelectedSection] = useState("dashboard");
-    const navigate = useNavigate();
 
-    // Contenido de cada sección
     const renderContent = () => {
         switch (selectedSection) {
             case "dashboard":
@@ -19,88 +22,59 @@ export default function Dashboard() {
                             <h2 className="text-xl font-semibold">Bootcamps</h2>
                             <img src="https://via.placeholder.com/300x150" alt="Gráfico de Bootcamps" />
                         </div>
-                        <div className="bg-white p-6 rounded-md shadow-md">
-                            <h2 className="text-xl font-semibold">Oportunidades</h2>
-                            <img src="https://via.placeholder.com/300x150" alt="Gráfico de Oportunidades" />
-                        </div>
-                        <div className="bg-white p-6 rounded-md shadow-md">
-                            <h2 className="text-xl font-semibold">Temáticas</h2>
-                            <img src="https://via.placeholder.com/300x150" alt="Gráfico de Temáticas" />
-                        </div>
                     </div>
                 );
-            // Puedes mantener otros casos si los necesitas
+            case "user":
+                return <div className="bg-white p-6 rounded-md shadow-md"><UserManagement /></div>;
+            case "bootcamps":
+                return <div className="bg-white p-6 rounded-md shadow-md"><Bootcamp /></div>;
+            case "category":
+                return <div className="bg-white p-6 rounded-md shadow-md"><Categorias /></div>;
+            case "opportunities":
+                return <div className="bg-white p-6 rounded-md shadow-md"><Oportunidades /></div>;
+            case "instituciones":
+                return <div className="bg-white p-6 rounded-md shadow-md"><Instituciones /></div>;
+            case "themes":
+                return <div className="bg-white p-6 rounded-md shadow-md"><Tematicas /></div>;
         }
-    };
-
-    const handleUserClick = () => {
-        navigate('/user'); // Esto te llevará a la ruta '/user'
     };
 
     return (
         <div className="flex h-screen bg-slate-200 text-white">
-            {/* Sidebar */}
-            <aside className="w-64 bg-gradient-to-b from-[#283E51] to-[#4B79A1] p-6 flex flex-col">
-                <div className="flex flex-col items-center space-x-3 py-10">
+            <aside className="w-64 bg-gradient-to-b fixed h-full from-[#283E51] to-[#4B79A1] p-6 flex flex-col">
+                <div className="flex flex-col items-center py-10">
                     <img className="w-28 h-auto bg-gray-500 rounded-lg mb-4"
                         src="https://static.vecteezy.com/system/resources/previews/009/292/244/non_2x/default-avatar-icon-of-social-media-user-vector.jpg"
                         alt="User" />
                     <h2 className="text-lg font-semibold">Pepito Peréz</h2>
                 </div>
-
-                {/* Menú de navegación */}
                 <nav>
                     <ul className="space-y-3">
-                        <li>
-                            <button onClick={() => setSelectedSection("dashboard")}
-                                className={`flex gap-3 p-3 rounded-md w-full ${selectedSection === "dashboard" ? "bg-gray-500" : "bg-[#404A69] hover:bg-gray-500"}`}>
-                                🏠 Dashboard
-                            </button>
-                        </li>
-                        <li>
-                            <button onClick={handleUserClick}
-                                className={`flex gap-3 p-3 rounded-md w-full ${selectedSection === "user" ? "bg-gray-500" : "bg-[#404A69] hover:bg-gray-500"}`}>
-                                👤 Usuarios
-                            </button>
-                        </li>
-                        <li>
-                            <button onClick={() => setSelectedSection("bootcamps")}
-                                className={`flex gap-3 p-3 rounded-md w-full ${selectedSection === "bootcamps" ? "bg-gray-500" : "bg-[#404A69] hover:bg-gray-500"}`}>
-                                🎓 Bootcamps
-                            </button>
-                        </li>
-                        <li>
-                            <button onClick={() => setSelectedSection("opportunities")}
-                                className={`flex gap-3 p-3 rounded-md w-full ${selectedSection === "opportunities" ? "bg-gray-500" : "bg-[#404A69] hover:bg-gray-500"}`}>
-                                💼 Oportunidades
-                            </button>
-                        </li>
-                        <li>
-                            <button onClick={() => setSelectedSection("themes")}
-                                className={`flex gap-3 p-3 rounded-md w-full ${selectedSection === "themes" ? "bg-gray-500" : "bg-[#404A69] hover:bg-gray-500"}`}>
-                                📚 Temáticas
-                            </button>
-                        </li>
+                        {[{ key: "dashboard", label: "🏠 Dashboard" },
+                        { key: "user", label: "👤 Usuarios" },
+                        { key: "bootcamps", label: "🎓 Bootcamps" },
+                        { key: "category", label: "📂 Categorias" },
+                        { key: "opportunities", label: "💼 Oportunidades" },
+                        { key: "instituciones", label: "🏛️ Instituciones" },
+                        { key: "themes", label: "📚 Temáticas" }].map(({ key, label }) => (
+                            <li key={key}>
+                                <button onClick={() => setSelectedSection(key)} className={`flex gap-3 p-3 rounded-md w-full ${selectedSection === key ? "bg-gray-500" : "bg-[#404A69] hover:bg-gray-500"}`}>{label}</button>
+                            </li>
+                        ))}
                     </ul>
                 </nav>
-
-                {/* Botón de salir */}
-                <div className="flex font-bold gap-3 mt-auto w-28 bg-[#FFBA08] p-3 rounded-md hover:bg-[#faa307]" >
+                <div className="flex font-bold gap-3 mt-auto w-28 bg-[#FFBA08] p-3 rounded-md hover:bg-[#faa307]">
                     <a href="/">Salir</a>
                 </div>
             </aside>
-
-            {/* Contenido dinámico */}
-            <div className="flex-1 p-6">
+            <main className="flex-1 ml-64 p-6">
                 <header className="flex justify-between items-center bg-[#404A69] p-4 rounded-md shadow-lg">
                     <h1 className="text-2xl font-semibold">Panel Administrativo</h1>
                 </header>
-
-                {/* Contenido seleccionado */}
-                <div className="mt-6 bg-white p-6 rounded-md text-black">
+                <section className="mt-6 bg-white p-6 rounded-md text-black">
                     {renderContent()}
-                </div>
-            </div>
+                </section>
+            </main>
         </div>
     );
 }

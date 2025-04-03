@@ -7,7 +7,7 @@ import {
   useLoaderData,
   useLocation
 } from "@remix-run/react";
-import type { LinksFunction } from "@remix-run/node";
+import { json, type LinksFunction } from "@remix-run/node";
 import { Toaster } from "react-hot-toast";
 import Navbar from "~/components/Navbar/Navbar";
 import Footer from "~/components/Footer/Footer";
@@ -15,9 +15,15 @@ import "./tailwind.css";
 import { checkAuth } from "~/services/authService";
 import type { LoaderFunction } from "@remix-run/node";
 
-export const loader: LoaderFunction = async ({ request }) => {
-  const isAuthenticated = await checkAuth(request);
-  return { isAuthenticated };
+
+export const loader: LoaderFunction = async ({ request }: { request: Request }) => {
+  const authData = await checkAuth(request);
+
+  if (!authData || typeof authData !== "object") {
+    return json({ isAuthenticated: false });
+  }
+  const { rol, nombre } = authData as { rol: string; nombre: string };
+  return json({ isAuthenticated: true, rol, nombre });
 };
 
 export const links: LinksFunction = () => [
@@ -34,7 +40,7 @@ export const links: LinksFunction = () => [
 ];
 
 export default function App() {
-  const { isAuthenticated } = useLoaderData<{ isAuthenticated: boolean }>();
+  const { isAuthenticated, rol, nombre } = useLoaderData<{ isAuthenticated: boolean; rol: string; nombre: string }>();
   const location = useLocation();
   const hiddenRoutes = [
     "/admin",
@@ -55,7 +61,7 @@ export default function App() {
       </head>
       <body className="bg-gray-100 font-roboto dark:bg-gray-800 h-full flex flex-col min-h-screen">
         <Toaster position="top-right" />
-        {!shouldHideNavAndFooter && <Navbar isAuthenticated={isAuthenticated} />}
+        {!shouldHideNavAndFooter && <Navbar isAuthenticated={isAuthenticated} rol={rol} nombre={nombre}  />}
         <main className="flex-grow">
           <Outlet />
         </main>
