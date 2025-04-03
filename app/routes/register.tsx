@@ -19,13 +19,13 @@ export const action: ActionFunction = async ({ request }) => {
       values: { nombre, apellido, fechaNacimiento, email },
     });
   } else {
-    register(
+    await register(
       nombre as string,
       apellido as string,
       fechaNacimiento as string,
       email as string,
       password as string);
-
+       
     const data = await login(email as string, password as string);
 
     const token = data.token.replace(/['"]+/g, "");
@@ -33,6 +33,7 @@ export const action: ActionFunction = async ({ request }) => {
     if (!token) {
       return json({ error: "No se pudo obtener el token." }, { status: 500 });
     }
+    
 
     return redirect("/novedades", {
       headers: {
