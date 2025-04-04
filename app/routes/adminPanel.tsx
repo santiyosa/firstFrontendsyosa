@@ -8,6 +8,7 @@ import Oportunidades from "./opportunities";
 import Tematicas from "./themes";
 import { Form, json, useLoaderData } from "@remix-run/react";
 import { checkAuth } from "~/services/authService";
+import DashboardAdmin from "./dashboardAdmin";
 
 
 export const loader: LoaderFunction = async ({ request }: { request: Request }) => {
@@ -30,15 +31,9 @@ export default function Dashboard() {
         switch (selectedSection) {
             case "dashboard":
                 return (
-                    <div className="grid grid-cols-2 gap-6">
-                        <div className="bg-white p-6 rounded-md shadow-md">
-                            <h2 className="text-xl font-semibold">Usuarios</h2>
-                            <img src="https://via.placeholder.com/300x150" alt="Gráfico de Usuarios" />
-                        </div>
-                        <div className="bg-white p-6 rounded-md shadow-md">
-                            <h2 className="text-xl font-semibold">Bootcamps</h2>
-                            <img src="https://via.placeholder.com/300x150" alt="Gráfico de Bootcamps" />
-                        </div>
+                    <div className="">
+                        <DashboardAdmin />
+                       
                     </div>
                 );
             case "user":
