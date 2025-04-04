@@ -1,6 +1,7 @@
 import Service from "./service"
 import Opportunity from "./opportunity"
 import DollHome from "./dollhome";
+import Benefits from "../Benefits";
 
 export default function HomeAntivirus() {
   return (
@@ -13,6 +14,9 @@ export default function HomeAntivirus() {
       </div>
       <div>
         <Service />
+      </div>
+      <div>
+        <Benefits />
       </div>
     </div>
   )
