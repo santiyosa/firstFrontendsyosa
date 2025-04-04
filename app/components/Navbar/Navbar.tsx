@@ -1,8 +1,7 @@
 import { useEffect, useState } from "react";
 import { Form, Link, useLocation, useNavigate } from "@remix-run/react";
 import { Menu, X, Sun, Moon, Search, User } from "lucide-react";
-import { ROL_ADMIN_ID, ROUTES } from "~/utils/constants";
-import AdminPanel from "~/routes/bootcamps";
+
 
 export interface NavbarProps {
   isAuthenticated: boolean;
