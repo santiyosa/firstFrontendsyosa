@@ -39,8 +39,8 @@ export default function Opportunity() {
   if (loading) return <p className="text-3xl text-[#32526E] text-center mb-5 dark:text-[#a8afc4]">Cargando oportunidades...</p>;
 
   return (
-    <section id="opportunity" className="py-12 w-full dark:bg-[#283747] text-black dark:text-white">
-      <h2 className="text-3xl text-[#32526E] text-center mb-5 dark:text-[#a8afc4]">
+    <section  className="py-12 w-full dark:bg-[#283747] text-black dark:text-white">
+      <h2 id="opportunity" className="text-3xl text-[#32526E] text-center mb-5 dark:text-[#a8afc4]">
         ¡Descubre estas oportunidades únicas!
       </h2>
 

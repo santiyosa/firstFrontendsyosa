@@ -32,8 +32,8 @@ export default function Benefits() {
   ];
 
   return (
-    <div className="px-10  py-12">
-      <h2 className="text-center dark: text-[#32526e] font-Roboto text-3xl mb-5">
+    <div  className="px-10  py-12">
+      <h2 id="benefits" className="text-center dark: text-[#32526e] font-Roboto text-3xl mb-5">
         ¡Obtén los siguientes beneficios al registrarte!
       </h2>
       <ul className="flex flex-wrap justify-center gap-10 mt-12 ">

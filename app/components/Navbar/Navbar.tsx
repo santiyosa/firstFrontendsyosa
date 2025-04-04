@@ -52,6 +52,7 @@ export default function Navbar({ isAuthenticated, rol, nombre, }: NavbarProps) {
             <>
               {[
                 { name: "Servicios", path: "#service" },
+                { name: "Beneficios", path: "#benefits" },
                 { name: "Oportunidades", path: "#opportunity" },
                 { name: "Quiénes Somos", path: "about" }
               ].map((item) => (
@@ -69,6 +70,7 @@ export default function Navbar({ isAuthenticated, rol, nombre, }: NavbarProps) {
                 <>
                   {[
                     { name: "Servicios", path: "#service" },
+                    { name: "Beneficios", path: "#benefits" },
                     { name: "Oportunidades", path: "#opportunity" },
                     { name: "Quiénes Somos", path: "about" },
                     { name: "Novedades", path: "novedades" }
@@ -201,6 +203,7 @@ export default function Navbar({ isAuthenticated, rol, nombre, }: NavbarProps) {
                     <>
                       {[
                         { name: "Servicios", path: "#service" },
+                        { name: "Beneficios", path: "#benefits" },
                         { name: "Oportunidades", path: "#opportunity" },
                         { name: "Quiénes Somos", path: "about" },
                         { name: "Novedades", path: "novedades" }
