@@ -9,20 +9,25 @@ import {
 } from "@remix-run/react";
 import { json, type LinksFunction } from "@remix-run/node";
 import { Toaster } from "react-hot-toast";
-import Navbar from "~/components/Navbar/Navbar";
-import Footer from "~/components/Footer/Footer";
 import "./tailwind.css";
 import { checkAuth } from "~/services/authService";
 import type { LoaderFunction } from "@remix-run/node";
+import Navbar from "./Components/Navbar/Navbar";
+import Footer from "./Components/Footer/Footer";
 
 
-export const loader: LoaderFunction = async ({ request }: { request: Request }) => {
+export const loader = async ({ request }: { request: Request }) => {
+  // Verificar si el usuario está autenticado y obtener el rol
   const authData = await checkAuth(request);
 
-  if (!authData || typeof authData !== "object") {
+  // Si no hay token, no hay autenticación
+  if (!authData) {
     return json({ isAuthenticated: false });
   }
-  const { rol, nombre } = authData as { rol: string; nombre: string };
+
+  // Si hay token, devolver la autenticación y el rol
+  const { rol } = authData;
+  const { nombre } = authData;
   return json({ isAuthenticated: true, rol, nombre });
 };
 
@@ -61,7 +66,7 @@ export default function App() {
       </head>
       <body className="bg-gray-100 font-roboto dark:bg-gray-800 h-full flex flex-col min-h-screen">
         <Toaster position="top-right" />
-        {!shouldHideNavAndFooter && <Navbar isAuthenticated={isAuthenticated} rol={rol} nombre={nombre}  />}
+        {!shouldHideNavAndFooter && <Navbar isAuthenticated={isAuthenticated} rol={rol} nombre={nombre} suppressHydrationWarning />}
         <main className="flex-grow">
           <Outlet />
         </main>

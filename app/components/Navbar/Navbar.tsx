@@ -1,15 +1,18 @@
 import { useState } from "react";
 import { Form, Link, useLocation } from "@remix-run/react";
 import { Menu, X, Sun, Moon, Search, User } from "lucide-react";
+import { ROL_ADMIN_ID, ROUTES } from "~/utils/constants";
+import Dashboard from "~/routes/adminPanel";
 
 export interface NavbarProps {
   isAuthenticated: boolean;
   nombre: string;
   rol: string;
+  suppressHydrationWarning: true
 }
 
 
-export default function Navbar({ isAuthenticated }: NavbarProps) {
+export default function Navbar({ isAuthenticated, rol, nombre, }: NavbarProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
@@ -36,39 +39,41 @@ export default function Navbar({ isAuthenticated }: NavbarProps) {
         </div>
 
         {/* Menú en pantallas grandes */}
-
-        {/* <ul>
-            {rol === ROLE_ADMIN ? (
-             <Link to={ROUTES.ADMIN} className="hover:underline">Administrador</Link>
-            ) : (
+        <ul>
+          {rol === ROL_ADMIN_ID ? (
+            <li>
+              <Link to={ROUTES.ADMIN} className="hover:underline">Panel</Link>
+            </li>
+          ) : (
+            <li>
               <Link to={ROUTES.DEFAULT} className="hover:underline">Novedades</Link>
-        
-            )}
-          </ul> */}
+            </li>
+          )}
+        </ul>
 
-        {isAuthenticated ? (
-          <ul className="hidden md:flex gap-6 font-semibold">
-            {["Servicios", "Oportunidades", "Quiénes Somos", "Novedades"].map((item, index) => (
-              <li key={index} className="relative group">
-                <a href={`/${item.toLowerCase().replace(" ", "-")}`} className="hover:text-gray-300 block pb-2">
-                  {item}
-                </a>
-                <span className="absolute left-1/2 bottom-0 translate-x-[-50%] w-0 h-[3px] bg-[#FFBA08] transition-all duration-300 group-hover:w-full"></span>
-              </li>
-            ))}
-          </ul>
-        ) : (
-          <ul className="hidden md:flex gap-6 font-semibold">
-            {["Servicios", "Oportunidades", "Quiénes Somos"].map((item, index) => (
-              <li key={index} className="relative group">
-                <a href={`/${item.toLowerCase().replace(" ", "-")}`} className="hover:text-gray-300 block pb-2">
-                  {item}
-                </a>
-                <span className="absolute left-1/2 bottom-0 translate-x-[-50%] w-0 h-[3px] bg-[#FFBA08] transition-all duration-300 group-hover:w-full"></span>
-              </li>
-            ))}
-          </ul>
-        )} 
+        <ul className="hidden md:flex gap-6 font-semibold">
+          {["Servicios", "Oportunidades", "Quiénes Somos", "Novedades"].map((item, index) => (
+            <li key={index} className="relative group">
+              <Link to={`/${item.toLowerCase().replace(/\s+/g, "-")}`} className="hover:text-gray-300 block pb-2">
+                {item}
+              </Link>
+              <span className="absolute left-1/2 bottom-0 translate-x-[-50%] w-0 h-[3px] bg-[#FFBA08] transition-all duration-300 group-hover:w-full"></span>
+            </li>
+          ))}
+        </ul>
+
+        <ul className="hidden md:flex gap-6 font-semibold">
+          {["Servicios", "Oportunidades", "Quiénes Somos"].map((item, index) => (
+            <li key={index} className="relative group">
+              <Link to={`/${item.toLowerCase().replace(/\s+/g, "-")}`} className="hover:text-gray-300 block pb-2">
+                {item}
+              </Link>
+              <span className="absolute left-1/2 bottom-0 translate-x-[-50%] w-0 h-[3px] bg-[#FFBA08] transition-all duration-300 group-hover:w-full"></span>
+            </li>
+          ))}
+        </ul>
+
+
       </div>
 
       <div>

@@ -1,4 +1,5 @@
 import { tokenCookie } from "../utils/cookies";
+import { jwtDecode, JwtPayload } from "jwt-decode";
 
 /**
 * Realiza la solicitud de inicio de sesión a la API.
@@ -16,7 +17,7 @@ export async function login(email: string, password: string) {
             body: JSON.stringify({ email, password })
         });
 
-        if(response.ok) {
+        if (response.ok) {
             const data = await response.json();
             return data;
         } else {
@@ -49,10 +50,10 @@ export async function register(
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ firstName, lastName, birthDate, email, password})
+            body: JSON.stringify({ firstName, lastName, birthDate, email, password })
         });
 
-        if(response.ok) {
+        if (response.ok) {
             const data = await response.json();
             return data;
         } else {
@@ -71,17 +72,38 @@ export async function register(
 export async function checkAuth(request: Request) {
     const cookieHeader = request.headers.get("Cookie");
     const token = await tokenCookie.parse(cookieHeader);
-    return !!token; // Retorna true si hay token, false si no
-  }
-  
-  /**
-   * Cierra la sesión eliminando la cookie del token.
-   * @returns {Promise<Object>} - Encabezados para eliminar la cookie.
-   */
-  export async function logout() {
+
+    if (!token) {
+        return null; // Si no hay token, retornar null
+    }
+
+    try {
+        // Decodificar el token para obtener los datos del usuario
+        const decodedToken: JwtPayload = jwtDecode(token);
+
+        // Extraer el rol del token decodificado
+        const rol = (decodedToken as Record<string, any>)["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"];
+
+        // Extraer el nombre del token decodificado
+        const nombre = (decodedToken as Record<string, any>)["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name"];
+
+
+        // Retornar un objeto con el token y el rol
+        return { token, rol, nombre };
+    } catch (error) {
+        console.error("Error al decodificar el token:", error);
+        return null; // Si hay un error al decodificar el token, retornar null
+    }
+}
+
+/**
+ * Cierra la sesión eliminando la cookie del token.
+ * @returns {Promise<Object>} - Encabezados para eliminar la cookie.
+ */
+export async function logout() {
     return {
-      headers: {
-        "Set-Cookie": await tokenCookie.serialize("", { maxAge: 0 }), // Borra la cookie
-      },
+        headers: {
+            "Set-Cookie": await tokenCookie.serialize("", { maxAge: 0 }), // Borra la cookie
+        },
     };
-  }
+}
