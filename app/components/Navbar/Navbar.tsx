@@ -51,8 +51,8 @@ export default function Navbar({ isAuthenticated, rol, nombre, }: NavbarProps) {
           {!isAuthenticated ? (
             <>
               {[
-                { name: "Servicios", path: "services" },
-                { name: "Oportunidades", path: "opportunities" },
+                { name: "Servicios", path: "#service" },
+                { name: "Oportunidades", path: "#opportunity" },
                 { name: "Quiénes Somos", path: "about" }
               ].map((item) => (
                 <li key={item.path} className="relative group">
@@ -68,8 +68,8 @@ export default function Navbar({ isAuthenticated, rol, nombre, }: NavbarProps) {
               {parseInt(rol, 10) !== 1 && (
                 <>
                   {[
-                    // { name: "Servicios", path: "services" },
-                    // { name: "Oportunidades", path: "opportunities" },
+                    { name: "Servicios", path: "#service" },
+                    { name: "Oportunidades", path: "#opportunity" },
                     { name: "Quiénes Somos", path: "about" },
                     { name: "Novedades", path: "novedades" }
                   ].map((item) => (
@@ -181,8 +181,8 @@ export default function Navbar({ isAuthenticated, rol, nombre, }: NavbarProps) {
               {!isAuthenticated ? (
                 <>
                   {[
-                    { name: "Servicios", path: "services" },
-                    { name: "Oportunidades", path: "opportunities" },
+                    { name: "Servicios", path: "#service" },
+                    { name: "Oportunidades", path: "#opportunity" },
                     { name: "Quiénes Somos", path: "about" }
                   ].map((item) => (
                     <li key={item.path}>
@@ -200,6 +200,8 @@ export default function Navbar({ isAuthenticated, rol, nombre, }: NavbarProps) {
                   {parseInt(rol, 10) !== 1 && (
                     <>
                       {[
+                        { name: "Servicios", path: "#service" },
+                        { name: "Oportunidades", path: "#opportunity" },
                         { name: "Quiénes Somos", path: "about" },
                         { name: "Novedades", path: "novedades" }
                       ].map((item) => (

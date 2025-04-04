@@ -1,6 +1,7 @@
 import ServiceCard from "./serviceCard";
 
 
+
 export default function Services() {
   return (
     <section id="service" className="py-12 w-full dark:bg-[#0f1629] text-black dark:text-white bg-slate-200">
