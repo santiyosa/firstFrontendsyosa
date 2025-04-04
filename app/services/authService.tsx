@@ -80,13 +80,10 @@ export async function checkAuth(request: Request) {
     try {
         // Decodificar el token para obtener los datos del usuario
         const decodedToken: JwtPayload = jwtDecode(token);
-
         // Extraer el rol del token decodificado
         const rol = (decodedToken as Record<string, any>)["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"];
-
         // Extraer el nombre del token decodificado
         const nombre = (decodedToken as Record<string, any>)["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name"];
-
 
         // Retornar un objeto con el token y el rol
         return { token, rol, nombre };

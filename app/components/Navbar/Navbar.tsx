@@ -1,8 +1,8 @@
-import { useState } from "react";
-import { Form, Link, useLocation } from "@remix-run/react";
+import { useEffect, useState } from "react";
+import { Form, Link, useLocation, useNavigate } from "@remix-run/react";
 import { Menu, X, Sun, Moon, Search, User } from "lucide-react";
 import { ROL_ADMIN_ID, ROUTES } from "~/utils/constants";
-import Dashboard from "~/routes/adminPanel";
+import AdminPanel from "~/routes/bootcamps";
 
 export interface NavbarProps {
   isAuthenticated: boolean;
@@ -17,8 +17,7 @@ export default function Navbar({ isAuthenticated, rol, nombre, }: NavbarProps) {
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
   const [isDarkMode, setIsDarkMode] = useState(false);
-  const location = useLocation(); // Usamos useLocation para saber la ruta actual
-
+  const location = useLocation();
   const toggleTheme = () => {
     setIsDarkMode(!isDarkMode);
     document.documentElement.classList.toggle("dark");
@@ -26,6 +25,15 @@ export default function Navbar({ isAuthenticated, rol, nombre, }: NavbarProps) {
 
   // Verificamos si estamos en la página de novedades
   const isNovedadesPage = location.pathname === "/novedades";
+
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (parseInt(rol, 10) === 1) {
+      navigate("/adminPanel", { replace: true });
+    }
+  }, [rol, navigate]);
 
   return (
     <nav className="bg-gradient-to-b from-[#283E51] to-[#4B79A1] dark:bg-[#172a41] text-white fixed w-full z-50 py-2 px-10 flex justify-between items-center mb-60">
@@ -39,43 +47,46 @@ export default function Navbar({ isAuthenticated, rol, nombre, }: NavbarProps) {
         </div>
 
         {/* Menú en pantallas grandes */}
-        <ul>
-          {rol === ROL_ADMIN_ID ? (
-            <li>
-              <Link to={ROUTES.ADMIN} className="hover:underline">Panel</Link>
-            </li>
+        <ul className="hidden md:flex gap-6 font-semibold">
+          {!isAuthenticated ? (
+            <>
+              {[
+                { name: "Servicios", path: "services" },
+                { name: "Oportunidades", path: "opportunities" },
+                { name: "Quiénes Somos", path: "about" }
+              ].map((item) => (
+                <li key={item.path} className="relative group">
+                  <Link to={`/${item.path}`} className="hover:text-gray-300 block pb-2">
+                    {item.name}
+                  </Link>
+                  <span className="absolute left-1/2 bottom-0 translate-x-[-50%] w-0 h-[3px] bg-[#FFBA08] transition-all duration-300 group-hover:w-full"></span>
+                </li>
+              ))}
+            </>
           ) : (
-            <li>
-              <Link to={ROUTES.DEFAULT} className="hover:underline">Novedades</Link>
-            </li>
+            <>
+              {parseInt(rol, 10) !== 1 && (
+                <>
+                  {[
+                    // { name: "Servicios", path: "services" },
+                    // { name: "Oportunidades", path: "opportunities" },
+                    { name: "Quiénes Somos", path: "about" },
+                    { name: "Novedades", path: "novedades" }
+                  ].map((item) => (
+                    <li key={item.path} className="relative group">
+                      <Link to={`/${item.path}`} className="hover:text-gray-300 block pb-2">
+                        {item.name}
+                      </Link>
+                      <span className="absolute left-1/2 bottom-0 translate-x-[-50%] w-0 h-[3px] bg-[#FFBA08] transition-all duration-300 group-hover:w-full"></span>
+                    </li>
+                  ))}
+                </>
+              )}
+            </>
           )}
         </ul>
 
-        <ul className="hidden md:flex gap-6 font-semibold">
-          {["Servicios", "Oportunidades", "Quiénes Somos", "Novedades"].map((item, index) => (
-            <li key={index} className="relative group">
-              <Link to={`/${item.toLowerCase().replace(/\s+/g, "-")}`} className="hover:text-gray-300 block pb-2">
-                {item}
-              </Link>
-              <span className="absolute left-1/2 bottom-0 translate-x-[-50%] w-0 h-[3px] bg-[#FFBA08] transition-all duration-300 group-hover:w-full"></span>
-            </li>
-          ))}
-        </ul>
-
-        <ul className="hidden md:flex gap-6 font-semibold">
-          {["Servicios", "Oportunidades", "Quiénes Somos"].map((item, index) => (
-            <li key={index} className="relative group">
-              <Link to={`/${item.toLowerCase().replace(/\s+/g, "-")}`} className="hover:text-gray-300 block pb-2">
-                {item}
-              </Link>
-              <span className="absolute left-1/2 bottom-0 translate-x-[-50%] w-0 h-[3px] bg-[#FFBA08] transition-all duration-300 group-hover:w-full"></span>
-            </li>
-          ))}
-        </ul>
-
-
       </div>
-
       <div>
         {/* Iconos en pantallas grandes */}
         <div className="hidden md:flex items-center space-x-4">
@@ -166,38 +177,55 @@ export default function Navbar({ isAuthenticated, rol, nombre, }: NavbarProps) {
             </div>
 
             {/* Opciones del menú */}
-            {isAuthenticated ? (
-              <ul className="flex flex-col gap-4 w-full text-center text-lg">
-                {["Servicios", "Oportunidades", "Quiénes Somos", "Novedades"].map((item, index) => (
-                  <li key={index}>
-                    <Link
-                      to={`/${item.toLowerCase().replace(" ", "-")}`}
-                      className="block py-2  transition-colors duration-300 hover:text-[#708BC6]">
-                      {item}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            ) : (
-              <ul className="flex flex-col gap-4 w-full text-center text-lg">
-                {["Servicios", "Oportunidades", "Quiénes Somos"].map((item, index) => (
-                  <li key={index}>
-                    <Link
-                      to={`/${item.toLowerCase().replace(" ", "-")}`}
-                      className="block py-2  transition-colors duration-300 hover:text-[#708BC6]">
-                      {item}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            )}
+            <ul className="flex flex-col gap-4 w-full text-center text-lg">
+              {!isAuthenticated ? (
+                <>
+                  {[
+                    { name: "Servicios", path: "services" },
+                    { name: "Oportunidades", path: "opportunities" },
+                    { name: "Quiénes Somos", path: "about" }
+                  ].map((item) => (
+                    <li key={item.path}>
+                      <Link
+                        to={`/${item.path}`}
+                        className="block py-2 transition-colors duration-300 hover:text-[#708BC6]"
+                      >
+                        {item.name}
+                      </Link>
+                    </li>
+                  ))}
+                </>
+              ) : (
+                <>
+                  {parseInt(rol, 10) !== 1 && (
+                    <>
+                      {[
+                        { name: "Quiénes Somos", path: "about" },
+                        { name: "Novedades", path: "novedades" }
+                      ].map((item) => (
+                        <li key={item.path}>
+                          <Link
+                            to={`/${item.path}`}
+                            className="block py-2 transition-colors duration-300 hover:text-[#708BC6]"
+                          >
+                            {item.name}
+                          </Link>
+                        </li>
+                      ))}
+                    </>
+                  )}
+                </>
+              )}
+            </ul>
 
             {/* Botones de Ingresar y Registrarme */}
-            <div className="flex gap-4 w-full justify-center ">
+            <div className="flex gap-4 w-full justify-center">
               {isAuthenticated ? (
                 <Form method="post" action="/logout">
-                  <button type="submit"
-                    className="bg-[#32526E] text-white px-6 py-2 rounded-lg text-lg transition-colors duration-300 hover:bg-[#233947]">
+                  <button
+                    type="submit"
+                    className="bg-[#32526E] text-white px-6 py-2 rounded-lg text-lg transition-colors duration-300 hover:bg-[#233947]"
+                  >
                     Cerrar sesión
                   </button>
                 </Form>
@@ -205,12 +233,14 @@ export default function Navbar({ isAuthenticated, rol, nombre, }: NavbarProps) {
                 <>
                   <Link
                     to="/login"
-                    className="bg-[#32526E] text-white px-6 py-2 rounded-lg text-lg transition-colors duration-300 hover:bg-[#233947]">
+                    className="bg-[#32526E] text-white px-6 py-2 rounded-lg text-lg transition-colors duration-300 hover:bg-[#233947]"
+                  >
                     Ingresar
                   </Link>
                   <Link
                     to="/registro"
-                    className="bg-[#32526E] text-white px-6 py-2 rounded-lg text-lg transition-colors duration-300 hover:bg-[#233947]">
+                    className="bg-[#32526E] text-white px-6 py-2 rounded-lg text-lg transition-colors duration-300 hover:bg-[#233947]"
+                  >
                     Registrarme
                   </Link>
                 </>
@@ -218,6 +248,7 @@ export default function Navbar({ isAuthenticated, rol, nombre, }: NavbarProps) {
             </div>
           </div>
         )}
+
       </div>
     </nav>
   );

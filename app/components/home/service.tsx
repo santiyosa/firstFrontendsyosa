@@ -1,4 +1,5 @@
-import ServiceCard from "~/components/home/serviceCard";
+import ServiceCard from "./serviceCard";
+
 
 export default function Services() {
   return (

@@ -1,5 +1,6 @@
 import type { MetaFunction } from "@remix-run/node";
-import HomeAntivirus from "../components/home/homeantivirus";
+import HomeAntivirus from "~/Components/home/homeantivirus";
+
 
 export const meta: MetaFunction = () => {
   return [

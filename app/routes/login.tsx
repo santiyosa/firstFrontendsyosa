@@ -53,23 +53,7 @@ export function decodeJWTWithoutVerify(token: string) {
 }
 
 export default function Login() {
-
-    // const actionData = useActionData();
     const fetcher = useFetcher();
-
-    // const storeUserDataInLocalStorage = (token) => {
-
-    //     const decodedToken = decodeJWTWithoutVerify(token);
-
-    //     const emailData = decodedToken["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name"];
-    //     const role = decodedToken["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"];
-
-    //     localStorage.setItem("email", emailData);
-    //     localStorage.setItem("role", role);
-
-    //     console.log("Email:", emailData);
-    // }
-
     return (
         <div className="flex justify-center items-center py-8 mt-24">
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-4">

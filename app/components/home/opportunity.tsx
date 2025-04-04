@@ -1,4 +1,4 @@
-import OpportunityCard from "~/components/home/opportunityCard";
+import OpportunityCard from "./opportunityCard";
 
 export default function Opportunity() {
   return (
