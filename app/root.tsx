@@ -14,6 +14,7 @@ import { checkAuth } from "~/services/authService";
 import type { LoaderFunction } from "@remix-run/node";
 import Navbar from "./Components/Navbar/Navbar";
 import Footer from "./Components/Footer/Footer";
+import WompiButton from "./Components/wompi";
 
 
 export const loader = async ({ request }: { request: Request }) => {
@@ -69,6 +70,8 @@ export default function App() {
         {!shouldHideNavAndFooter && <Navbar isAuthenticated={isAuthenticated} rol={rol} nombre={nombre} suppressHydrationWarning />}
         <main className="flex-grow">
           <Outlet />
+          
+      <WompiButton/>
         </main>
         {!shouldHideNavAndFooter && <Footer />}
         <ScrollRestoration />
