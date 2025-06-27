@@ -1,7 +1,7 @@
 import { useLoaderData } from '@remix-run/react';
 import type { LoaderFunction } from '@remix-run/node';
 import { useState } from 'react';
-import Carrusel from '~/Components/carruselNovedades/carrusel';
+import Carrusel from '~/components/carruselNovedades/carrusel';
 
 
 type Oportunidad = {

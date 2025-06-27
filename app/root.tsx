@@ -11,9 +11,9 @@ import { json, type LinksFunction } from "@remix-run/node";
 import { Toaster } from "react-hot-toast";
 import "./tailwind.css";
 import { checkAuth } from "~/services/authService";
-import Navbar from "./Components/Navbar/Navbar";
-import Footer from "./Components/Footer/Footer";
-import WompiButton from "./Components/wompi";
+import Navbar from "~/components/navbar/navbar";
+import Footer from "~/components/footer/footer";
+import WompiButton from "~/components/wompi";
 
 
 export const loader = async ({ request }: { request: Request }) => {

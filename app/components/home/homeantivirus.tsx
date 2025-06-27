@@ -1,7 +1,7 @@
 import Service from "./service"
 import Opportunity from "./opportunity"
 import DollHome from "./dollhome";
-import Benefits from "../Benefits";
+import Benefits from "../benefits";
 
 
 export default function HomeAntivirus() {
