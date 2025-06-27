@@ -1,6 +1,6 @@
 import { Instagram, Linkedin, Youtube, Facebook } from "lucide-react";
 
-export default function Footer() {
+export default function footer() {
   return (
     <footer className="bg-gradient-to-b from-[#4879A1] to-[#283E51] text-white py-6 text-center flex flex-col items-center">
       {/* Logo y texto */}

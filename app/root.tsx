@@ -13,6 +13,7 @@ import "./tailwind.css";
 import { checkAuth } from "~/services/authService";
 import WompiButton from "~/components/wompi";
 import Navbar from "./components/navbar/navbar";
+import Footer from "./components/footer/footer";
 
 
 
@@ -73,7 +74,7 @@ export default function App() {
           
       <WompiButton/>
         </main>
-        {!shouldHideNavAndFooter && <footer />}
+        {!shouldHideNavAndFooter && <Footer  />}
         <ScrollRestoration />
         <Scripts />
       </body>
