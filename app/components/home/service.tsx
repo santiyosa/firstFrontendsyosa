@@ -11,7 +11,7 @@ export default function Services() {
           <ServiceCard
             className=""
             link=""
-            imageSrc="../public/img/imagen1.png"
+            imageSrc="/img/imagen1.png"
             imageAlt="Pro Vocación"
             title="Pro Vocación"
             description="Descubre tu verdadera vocación a través de nuestro programa Pro-Vocación. Te ayudamos a identificar tus fortalezas y a explorar las mejores opciones educativas y profesionales. ¡Da el primer paso hacia tu futuro hoy!"
@@ -25,12 +25,12 @@ export default function Services() {
             title="Asesoría Sociopedagógica"
             description="Recibe orientación personalizada para superar los desafíos educativos. Nuestra asesoría sociopedagógica te ofrece herramientas y estrategias para mejorar tu rendimiento académico y bienestar personal."
             buttonText=" LO QUIERO "
-            imageSrc="./public/img/imagen2.png"
+            imageSrc="/img/imagen2.png"
           />
           <ServiceCard
             className=""
             link=""
-            imageSrc="public/img/imagen3.png"
+            imageSrc="/img/imagen3.png"
             imageAlt="Test Sociovocacional"
             title="Test Sociovocacional"
             description="¿No estás seguro de cuál es la mejor carrera para ti? Nuestro Test Sociovocacional te guiará en la elección de una carrera basada en tus intereses, habilidades y valores personales. ¡Descubre tu camino ideal!"
