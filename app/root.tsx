@@ -11,9 +11,10 @@ import { json, type LinksFunction } from "@remix-run/node";
 import { Toaster } from "react-hot-toast";
 import "./tailwind.css";
 import { checkAuth } from "~/services/authService";
-import Navbar from "~/components/navbar/navbar";
-import Footer from "~/components/footer/footer";
 import WompiButton from "~/components/wompi";
+import Navbar from "./components/navbar/navbar";
+
+
 
 
 export const loader = async ({ request }: { request: Request }) => {
@@ -72,7 +73,7 @@ export default function App() {
           
       <WompiButton/>
         </main>
-        {!shouldHideNavAndFooter && <Footer />}
+        {!shouldHideNavAndFooter && <footer />}
         <ScrollRestoration />
         <Scripts />
       </body>

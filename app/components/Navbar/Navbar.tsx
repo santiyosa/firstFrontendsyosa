@@ -11,7 +11,7 @@ export interface NavbarProps {
 }
 
 
-export default function Navbar({ isAuthenticated, rol, nombre, }: NavbarProps) {
+export default function navbar({ isAuthenticated, rol, nombre, }: NavbarProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
