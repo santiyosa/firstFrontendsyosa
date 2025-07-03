@@ -1,5 +1,6 @@
 import { tokenCookie } from "../utils/cookies";
 import { jwtDecode, JwtPayload } from "jwt-decode";
+import { API_URL } from "../utils/api";
 
 /**
 * Realiza la solicitud de inicio de sesión a la API.
@@ -9,7 +10,7 @@ import { jwtDecode, JwtPayload } from "jwt-decode";
 */
 export async function login(email: string, password: string) {
     try {
-        const response = await fetch('http://localhost:5000/api/auth/login', {
+        const response = await fetch(`${API_URL}/api/auth/login`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -45,7 +46,7 @@ export async function register(
     password: string
 ) {
     try {
-        const response = await fetch('http://localhost:5000/api/auth/register', {
+        const response = await fetch(`${API_URL}/api/auth/register`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

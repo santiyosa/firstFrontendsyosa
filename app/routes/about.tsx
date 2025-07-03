@@ -1,4 +1,5 @@
 import axios from "axios";
+import { API_URL } from "../utils/api";
 import { useEffect, useState } from "react";
 
 const About = () => {
@@ -6,7 +7,7 @@ const About = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:5000/api/images")
+      .get(`${API_URL}/api/images`)
       .then((res) => {
         console.log("Data:", res.data);
         setImages(res.data);

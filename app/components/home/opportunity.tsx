@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { API_URL } from "../../utils/api";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination, Autoplay } from "swiper/modules";
 import "swiper/css";
@@ -18,7 +19,7 @@ export default function Opportunity() {
   //Instrucción si vamos a quitar el token(Authorize) en oportunidades 
   const fetchOpportunities = async () => {
       try {
-        const response = await fetch("http://localhost:5000/api/Oportunidad", {
+        const response = await fetch(`${API_URL}/api/Oportunidad`, {
           headers: { "Content-Type": "application/json" }
         });
         if (!response.ok) {

@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 
-const API_URL = "http://localhost:5000/api/User";
+import { API_URL as BASE_API_URL } from "../utils/api";
+const API_URL = `${BASE_API_URL}/api/User`;
 
 interface User {
   id: number;

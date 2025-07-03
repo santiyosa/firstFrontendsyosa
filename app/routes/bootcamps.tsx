@@ -1,6 +1,7 @@
 import { useLoaderData, Form, useFetcher } from "@remix-run/react";
 import { json, LoaderFunction, ActionFunction, redirect } from "@remix-run/node";
 import axios from "axios";
+import { API_URL } from "../utils/api";
 
 interface Bootcamp {
   id: number;
@@ -13,7 +14,7 @@ interface Bootcamp {
 
 export const loader: LoaderFunction = async () => {
   try {
-    const response = await axios.get<Bootcamp[]>("http://localhost:3000/api/Bootcamp");
+    const response = await axios.get<Bootcamp[]>(`${API_URL}/api/Bootcamp`);
     return json(response.data ?? []);
   } catch (error) {
     console.error("Error cargando bootcamps:", error);
@@ -40,7 +41,7 @@ export const action: ActionFunction = async ({ request }) => {
 
   try {
     let response;
-    const baseUrl = "http://localhost:3000/api/Bootcamp";
+    const baseUrl = `${API_URL}/api/Bootcamp`;
     
     switch (method) {
       case "POST":

@@ -1,6 +1,7 @@
 import { useLoaderData, Form, useFetcher } from "@remix-run/react";
 import { json, LoaderFunction, ActionFunction, redirect } from "@remix-run/node";
 import axios from "axios";
+import { API_URL } from "../utils/api";
 
 interface Tematica {
   id: number;
@@ -10,7 +11,7 @@ interface Tematica {
 
 export const loader: LoaderFunction = async () => {
   try {
-    const response = await axios.get<Tematica[]>("http://localhost:5000/api/Tematica");
+    const response = await axios.get<Tematica[]>(`${API_URL}/api/Tematica`);
     return json(response.data ?? []);
   } catch (error) {
     console.error("Error cargando temáticas:", error);
@@ -39,7 +40,7 @@ export const action: ActionFunction = async ({ request }) => {
 
   try {
     let response;
-    const baseUrl = "http://localhost:5000/api/Tematica";
+    const baseUrl = `${API_URL}/api/Tematica`;
 
     switch (method) {
       case "POST":

@@ -1,6 +1,7 @@
 import { useLoaderData, Form, useFetcher } from "@remix-run/react";
 import { json, LoaderFunction, ActionFunction, redirect } from "@remix-run/node";
 import axios from "axios";
+import { API_URL } from "../utils/api";
 
 interface Oportunidad {
   id: number;
@@ -20,7 +21,7 @@ interface Oportunidad {
 
 export const loader: LoaderFunction = async () => {
   try {
-    const response = await axios.get<Oportunidad[]>("http://localhost:5000/api/Oportunidad");
+    const response = await axios.get<Oportunidad[]>(`${API_URL}/api/Oportunidad`);
     return json(response.data ?? []);
   } catch (error) {
     console.error("Error cargando oportunidades:", error);
@@ -59,7 +60,7 @@ export const action: ActionFunction = async ({ request }) => {
 
   try {
     let response;
-    const baseUrl = "http://localhost:5000/api/Oportunidad";
+    const baseUrl = `${API_URL}/api/Oportunidad`;
 
     switch (method) {
       case "POST":
