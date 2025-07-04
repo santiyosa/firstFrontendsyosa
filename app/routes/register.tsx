@@ -1,10 +1,6 @@
 import React from "react";
-import { login, register } from "~/services/authService";
 
-export const action: ActionFunction = async ({ request }) => {
-  // Eliminar el action de Remix, el registro se hará desde el frontend
-  return json({ error: "El registro debe hacerse desde el frontend." }, { status: 405 });
-};
+import { login, register } from "~/services/authService";
 
 
 export default function Register() {
