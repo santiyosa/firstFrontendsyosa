@@ -1,3 +1,4 @@
+import React from "react";
 import { motion } from "framer-motion";
 import { login } from "../services/authService";
 import { tokenCookie } from "../utils/cookies";
@@ -53,7 +54,35 @@ export function decodeJWTWithoutVerify(token: string) {
 }
 
 export default function Login() {
-    const fetcher = useFetcher();
+    // Usar un formulario controlado para llamar directamente a la API externa
+    const [email, setEmail] = React.useState("");
+    const [password, setPassword] = React.useState("");
+    const [error, setError] = React.useState("");
+    const [loading, setLoading] = React.useState(false);
+    const navigate = typeof window !== "undefined" ? (window as any).location : null;
+
+    const handleSubmit = async (e: React.FormEvent) => {
+        e.preventDefault();
+        setLoading(true);
+        setError("");
+        try {
+            const data = await login(email, password);
+            if (!data || !data.token) {
+                setError("Correo o contraseña incorrectos.");
+                setLoading(false);
+                return;
+            }
+            // Guardar el token en cookie (opcional: puedes usar tokenCookie.serialize aquí si lo necesitas)
+            document.cookie = `token=${data.token}; path=/`;
+            // Redirigir
+            window.location.href = "/novedades";
+        } catch (err) {
+            setError("Ocurrió un problema. Inténtalo de nuevo.");
+        } finally {
+            setLoading(false);
+        }
+    };
+
     return (
         <div className="flex justify-center items-center py-8 mt-24">
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-4">
@@ -69,46 +98,25 @@ export default function Login() {
                         whileTap={{ scale: 0.9 }}
                     />
                 </div>
-
                 <div className="bg-white p-6 rounded-xl shadow-md w-[450px]">
-                    <div className="flex justify-between font-bold p-3 gap-x-2">
-                        <button type="submit" className="w-full px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-700 flex items-center justify-center gap-x-2">
-                            <img src="/google-brands.svg" alt="Google" className="w-5 h-5" />
-                            Ingresa con Google
-                        </button>
-                        <button type="submit" className="w-full px-4 py-2 bg-blue-800 text-white rounded-md hover:bg-blue-700 flex items-center justify-center gap-x-2">
-                            <img src="/facebook-brands.svg" alt="Facebook" className="w-5 h-5" />
-                            Ingresa con Facebook
-                        </button>
-                    </div>
-
                     <h2 className="text-2xl my-6 mx-4 text-gray-800">
                         Bienvenido a tu <br />
                         <span className="font-bold">banco de oportunidades</span>
                     </h2>
-
-                    <fetcher.Form method="post">
+                    <form onSubmit={handleSubmit}>
                         <div className="mb-5">
                             <label htmlFor="email" className="block text-sm font-medium">Correo electrónico</label>
-                            <input type="email" id="email" name="email" className="mt-1 p-2 w-full border border-gray-300 rounded-md" placeholder="Ingresa tu correo" required />
+                            <input type="email" id="email" name="email" className="mt-1 p-2 w-full border border-gray-300 rounded-md" placeholder="Ingresa tu correo" required value={email} onChange={e => setEmail(e.target.value)} />
                         </div>
                         <div className="mb-5">
                             <label htmlFor="password" className="block text-sm font-medium">Contraseña</label>
-                            <input type="password" id="password" name="password" className="mt-1 p-2 w-full border border-gray-300 rounded-md" placeholder="Ingresa tu contraseña" required />
+                            <input type="password" id="password" name="password" className="mt-1 p-2 w-full border border-gray-300 rounded-md" placeholder="Ingresa tu contraseña" required value={password} onChange={e => setPassword(e.target.value)} />
                         </div>
-                        <div className="flex justify-between mt-1 p-2">
-                            <p><input type="checkbox" /> Recordarme</p>
-                            <button type="button" className="ml-1 text-orange-600 text-sm">Olvidé mi contraseña</button>
-                        </div>
+                        {error && <div className="text-red-500 mb-2">{error}</div>}
                         <div className="flex justify-center">
-                            <button type="submit" className="w-full px-4 py-2 bg-orange-400 text-white rounded-md hover:bg-blue-700">Iniciar sesión</button>
+                            <button type="submit" className="w-full px-4 py-2 bg-orange-400 text-white rounded-md hover:bg-blue-700" disabled={loading}>{loading ? "Cargando..." : "Iniciar sesión"}</button>
                         </div>
-                        <div className="flex justify-center mt-2 p-2">
-                            <p>¿No tienes una cuenta?
-                                <button type="button" className="ml-1 text-orange-600 text-sm">Regístrate</button>
-                            </p>
-                        </div>
-                    </fetcher.Form>
+                    </form>
                 </div>
             </div>
         </div>
