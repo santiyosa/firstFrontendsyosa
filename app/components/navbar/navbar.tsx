@@ -29,7 +29,9 @@ export default function navbar({ isAuthenticated, rol, nombre, }: NavbarProps) {
   const navigate = useNavigate();
 
   useEffect(() => {
+console.log("Rol:", "isAuthenticated", "nombre", rol, isAuthenticated, nombre);
     if (parseInt(rol, 10) === 1) {
+    console.log("Rol 1, redirigiendo a adminPanel");
       navigate("/adminPanel", { replace: true });
     }
   }, [rol, navigate]);
@@ -114,7 +116,8 @@ export default function navbar({ isAuthenticated, rol, nombre, }: NavbarProps) {
                         to="/login"
                         className="block px-4 py-2 text-gray-800 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 rounded transition-colors"
                       >
-                        Ingresar
+                        <div>{isAuthenticated} Ingresar118</div>
+                      
                       </Link>
                       <Link
                         to="/register"
@@ -239,7 +242,7 @@ export default function navbar({ isAuthenticated, rol, nombre, }: NavbarProps) {
                     to="/login"
                     className="bg-[#32526E] text-white px-6 py-2 rounded-lg text-lg transition-colors duration-300 hover:bg-[#233947]"
                   >
-                    Ingresar
+                    Ingresar243
                   </Link>
                   <Link
                     to="/registro"

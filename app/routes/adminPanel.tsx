@@ -22,7 +22,6 @@ export const loader: LoaderFunction = async ({ request }: { request: Request }) 
 };
 
 
-
 export default function Dashboard() {
     const [selectedSection, setSelectedSection] = useState("dashboard");
     const { user } = useLoaderData<typeof loader>();
@@ -32,8 +31,7 @@ export default function Dashboard() {
             case "dashboard":
                 return (
                     <div className="">
-                        <DashboardAdmin />
-                       
+                        <DashboardAdmin />                      
                     </div>
                 );
             case "user":
