@@ -116,7 +116,7 @@ console.log("Rol:", "isAuthenticated", "nombre", rol, isAuthenticated, nombre);
                         to="/login"
                         className="block px-4 py-2 text-gray-800 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 rounded transition-colors"
                       >
-                        <div>{isAuthenticated} Ingresar118</div>
+                        <div>{isAuthenticated} Ingresar</div>
                       
                       </Link>
                       <Link
@@ -242,7 +242,7 @@ console.log("Rol:", "isAuthenticated", "nombre", rol, isAuthenticated, nombre);
                     to="/login"
                     className="bg-[#32526E] text-white px-6 py-2 rounded-lg text-lg transition-colors duration-300 hover:bg-[#233947]"
                   >
-                    Ingresar243
+                    Ingresar
                   </Link>
                   <Link
                     to="/registro"
